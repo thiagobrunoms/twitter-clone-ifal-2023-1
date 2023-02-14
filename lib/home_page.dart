@@ -30,11 +30,17 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 150,
           height: 300,
           color: Colors.red[100],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, //VERTICAL
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, //VERTICAL
             crossAxisAlignment: CrossAxisAlignment.center, //HORIZONTAL
             children: [
               Text('Contando: '),
+              Column(
+                children: [
+                  Text('Thiago'),
+                  Text('Sales'),
+                ],
+              ),
               Text('$_counter')
             ],
           )
