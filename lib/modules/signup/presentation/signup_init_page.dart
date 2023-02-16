@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/social_button.dart';
 
 import '../../../shared/ui/widgets/twitter_button.dart';
 
 class SignUpInit extends StatelessWidget {
   const SignUpInit({super.key});
-
-
-  //BAD SMELL - LONG METHOD
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,9 @@ class SignUpInit extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildTwitterIcon(),
-              _buildCentralMessage(),
+              const Text('See what\'s happening \n in the world right now.', 
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 22),),
+              _buildCentralMessage(context),
               _buildCreateAccountMessage(),
             ],
           ),
@@ -32,20 +32,25 @@ class SignUpInit extends StatelessWidget {
     return Image.asset('assets/images/bird_icon.png', width: 50, height: 50,);
   }
 
-  Widget _buildCentralMessage() {
+  Widget _buildCentralMessage(BuildContext context) {
     return Column(
       children: [
-        const Text('See what\'s happening \n in the world right now.', style: TextStyle(fontFamily: 'Poppins'),),
-        Padding(
-          padding: const  EdgeInsets.only(top: 20.0),
-          child: TwitterButton(child: Text('Create Account'), callback: confirmar),
-        )
+        TwitterButton.social(child: _buildSocialContent(logoPath: 'assets/images/google.png', socialName: 'Google'), callback: handleSocial, ),
+        const SizedBox(height: 20,),
+        TwitterButton(callback: () {
+          handleSignUp(context);
+        }, child: const Text('Create Account'))
       ],
     );
   }
 
-  void confirmar() {
-    print('Confirmando');
+  void handleSignUp(BuildContext context) {
+    print('Fazer sign up normal!!');
+    Navigator.pushNamed(context, '/create_account');
+  }
+
+  void handleSocial() {
+    print('Login com google');
   }
 
   Widget _buildCreateAccountMessage() {
@@ -59,5 +64,18 @@ class SignUpInit extends StatelessWidget {
         )
       ]
     ));
+  }
+
+  Widget _buildSocialContent({required String socialName, required  String logoPath}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(logoPath, width: 30, height: 30,),
+        const SizedBox(width: 10,),
+        Text(
+          'Continue with $socialName', 
+          style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),)
+      ],
+    );
   }
 }
