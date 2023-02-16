@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/social_sign_in_button.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/twitter_text_form.dart';
 
 import '../../../shared/ui/widgets/twitter_button.dart';
 
@@ -36,10 +38,12 @@ class SignUpInit extends StatelessWidget {
     return Column(
       children: [
         const Text('See what\'s happening \n in the world right now.', style: TextStyle(fontFamily: 'Poppins'),),
+        SocialSignInButton(logo: 'assets/images/google.png', socialName: 'Google', callback: () {},),
         Padding(
           padding: const  EdgeInsets.only(top: 20.0),
           child: TwitterButton(child: Text('Create Account'), callback: confirmar),
-        )
+        ),
+        TwitterTextForm()
       ],
     );
   }

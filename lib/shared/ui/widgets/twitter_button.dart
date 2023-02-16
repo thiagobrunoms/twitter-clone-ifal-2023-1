@@ -8,15 +8,21 @@ class TwitterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(60)
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.8,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(60)
+          )
+        ),
+        onPressed: callback,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+          child: child,
         )
       ),
-      onPressed: callback,
-      child: child
     );
   }
 }
