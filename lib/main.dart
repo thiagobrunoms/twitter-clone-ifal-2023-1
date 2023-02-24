@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone_ifal_2023/home_page.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/choose_language_page.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/signup_init_page.dart';
 
 import 'modules/signup/presentation/pages/create_account_page.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const SignUpInit(), // const MyHomePage(title: 'Flutter', faculty: 'IFAL 2023',),
       routes: {
-        '/create_account':(context) => const CreateAccountPage()
+        '/create_account': (context) => const CreateAccountPage(),
+        '/choose_language': (context) => const ChooseLanguagePage(), 
       },
       
     );

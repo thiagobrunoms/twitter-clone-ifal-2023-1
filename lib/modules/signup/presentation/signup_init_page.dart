@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/social_button.dart';
+import 'package:twitter_clone_ifal_2023/shared/ui/widgets/bird_icon_widget.dart';
 
 import '../../../shared/ui/widgets/twitter_button.dart';
 
@@ -16,7 +17,7 @@ class SignUpInit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildTwitterIcon(),
+              const BirdIconWidget(),
               const Text('See what\'s happening \n in the world right now.', 
                 style: TextStyle(fontFamily: 'Poppins', fontSize: 22),),
               _buildCentralMessage(context),
@@ -28,25 +29,24 @@ class SignUpInit extends StatelessWidget {
     );
   }
 
-  Widget _buildTwitterIcon() {
-    return Image.asset('assets/images/bird_icon.png', width: 50, height: 50,);
-  }
-
   Widget _buildCentralMessage(BuildContext context) {
     return Column(
       children: [
         TwitterButton.social(child: _buildSocialContent(logoPath: 'assets/images/google.png', socialName: 'Google'), callback: handleSocial, ),
         const SizedBox(height: 20,),
-        TwitterButton(callback: () {
-          handleSignUp(context);
-        }, child: const Text('Create Account'))
+        TwitterButton(
+          callback: () {
+            handleSignUp(context);
+          }, 
+          child: const Text('Create Account')
+        )
       ],
     );
   }
 
   void handleSignUp(BuildContext context) {
     print('Fazer sign up normal!!');
-    Navigator.pushNamed(context, '/create_account');
+    Navigator.pushNamed(context, '/choose_language');
   }
 
   void handleSocial() {
