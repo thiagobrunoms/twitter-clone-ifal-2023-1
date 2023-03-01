@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const SignUpInit(), // const MyHomePage(title: 'Flutter', faculty: 'IFAL 2023',),
       routes: {
-        '/create_account': (context) => const CreateAccountPage(),
+        '/create_account': (context) => CreateAccountPage(),
         '/choose_language': (context) => const ChooseLanguagePage(), 
       },
       

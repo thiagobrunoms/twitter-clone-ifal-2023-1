@@ -46,7 +46,7 @@ class SignUpInit extends StatelessWidget {
 
   void handleSignUp(BuildContext context) {
     print('Fazer sign up normal!!');
-    Navigator.pushNamed(context, '/choose_language');
+    Navigator.pushNamed(context, '/create_account');
   }
 
   void handleSocial() {
