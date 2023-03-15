@@ -32,10 +32,16 @@ class SignUpInit extends StatelessWidget {
   Widget _buildCentralMessage(BuildContext context) {
     return Column(
       children: [
-        TwitterButton.social(child: _buildSocialContent(logoPath: 'assets/images/google.png', socialName: 'Google'), callback: handleSocial, ),
+        TwitterButton.social(
+          onPressed: handleSocial,
+          child: _buildSocialContent(
+            logoPath: 'assets/images/google.png', 
+            socialName: 'Google'
+          ), 
+        ),
         const SizedBox(height: 20,),
         TwitterButton(
-          callback: () {
+          onPressed: () {
             handleSignUp(context);
           }, 
           child: const Text('Create Account')

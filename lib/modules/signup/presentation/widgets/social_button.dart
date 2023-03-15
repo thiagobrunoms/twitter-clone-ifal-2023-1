@@ -33,7 +33,7 @@ class SocialButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(logoPath, width: 30, height: 30,),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             Text(
               'Continue with $socialName', 
               style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),)

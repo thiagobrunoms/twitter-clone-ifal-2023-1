@@ -4,22 +4,34 @@ import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_text_field/twi
 
 class TwitterTextField extends StatefulWidget {
   final String hint;
+  final String? errorMessage;
   bool Function(String)? validate;
+  TwitterTextFieldController controller;
 
-  TwitterTextField({super.key, required this.hint, this.validate});
+  TwitterTextField({
+    super.key, 
+    required this.hint, 
+    this.errorMessage, 
+    required this.controller, 
+    this.validate
+  });
 
   @override
   State<TwitterTextField> createState() => _TwitterTextFieldState();
 }
 
 class _TwitterTextFieldState extends State<TwitterTextField> {
-  TwitterTextFieldController controller = TwitterTextFieldController();
+  late TwitterTextFieldController controller;
 
   @override
   void initState() {
+    controller = widget.controller;
+    controller.setErrorMessage(widget.errorMessage);
+
     if (widget.validate != null) {
-      controller.setCallback(widget.validate!);
+      controller.setValidator(widget.validate!);
     }
+
     super.initState();
   }
 
@@ -32,7 +44,8 @@ class _TwitterTextFieldState extends State<TwitterTextField> {
             hintText: widget.hint,
             suffixIcon: controller.isValid ? 
               const Icon(Icons.check_circle_rounded, color: Colors.green) 
-              : const SizedBox()
+              : const SizedBox(),
+            errorText: controller.getErrorMessage
           ),
           onChanged: (text) {
             controller.setInput(text);
