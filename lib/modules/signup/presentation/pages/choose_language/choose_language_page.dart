@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/custom_checkbox/custom_checkbox.dart';
-import 'package:twitter_clone_ifal_2023/shared/ui/widgets/bird_icon_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import '../../../../../shared/ui/widgets/twitter_button.dart';
 import '../../widgets/twitter_appbar.dart';
 import 'choose_language_page_controller.dart';
 
@@ -29,6 +27,12 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             children: [
               _buildSearchField(),
               _buildLanguageList(),
+              TwitterButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/create_account');
+                  }, 
+                  child: const Text('Create Account')
+                )
             ],
           ),
         )

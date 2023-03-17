@@ -12,13 +12,15 @@ class FriendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildFriendAvatar(),
-          _buildFriendContent(),
+          const SizedBox(width: 10),
+          Expanded(child: _buildFriendContent()),
         ],
       ),
     );
@@ -42,6 +44,7 @@ class FriendCard extends StatelessWidget {
 
   Widget _buildFriendTopContent() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
@@ -52,8 +55,9 @@ class FriendCard extends StatelessWidget {
         TwitterButton(
           width: 100,
           height: 30,
-          child: const Text('Seguir')
-        ,)
+          child: const Text('Seguir'),
+          onPressed: () {},
+        )
       ],
     );
   }

@@ -77,5 +77,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   void confirm() {
     print('Continuando para próxima tela!');
+    Navigator.pushNamed(context, '/friend_suggestions');
   }
 }

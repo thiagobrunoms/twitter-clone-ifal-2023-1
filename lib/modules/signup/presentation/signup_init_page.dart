@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/social_button.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/bird_icon_widget.dart';
 
 import '../../../shared/ui/widgets/twitter_button.dart';
