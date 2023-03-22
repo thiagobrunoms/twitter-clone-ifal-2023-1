@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/domain/signup_repository.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/helpers/validators.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_button.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_text_field/text_field.dart';
 
 import '../../../../../shared/ui/widgets/twitter_text_field/twitter_text_field_controller.dart';
+import '../../../data/datasources/signup_google_datasource.dart';
+import '../../../data/datasources/signup_rest_datasource.dart';
+import '../../../data/datasources/signup_web_datasource.dart';
+import '../../../data/repositories/signup_repository.dart';
+import '../../../domain/credentials.dart';
 import '../../widgets/twitter_appbar.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -76,7 +82,17 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   }
 
   void confirm() {
-    print('Continuando para próxima tela!');
+    SignUpGoogleDatasource googleDatasource = SignUpGoogleDatasource();
+    SignUpWebDatasource signUpWebDatasource = SignUpRestDatasource();
+
+    Credentials credential = Credentials(
+      name: nameController.input,
+      password: emailController.input,
+      username: "",
+      password: "",
+    );
+
+    SignUpRepository repository = SignUpRepositoryImpl(socialDatasource: googleDatasource, webDatasource: signUpWebDatasource);
     Navigator.pushNamed(context, '/friend_suggestions');
   }
 }

@@ -18,6 +18,7 @@ abstract class _FriendSuggestionsPageControllerBase with Store {
     //Para simular um atraso de rede!!!
     await Future.delayed(const Duration(seconds: 5));
 
-    return await repository.loadSuggestionsFriends();
+    // return await repository.loadSuggestionsFriends();
+    return await [];
   }
 }
