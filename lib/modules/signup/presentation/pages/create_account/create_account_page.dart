@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/helpers/validators.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/create_account/create_account_page_controller.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_button.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_text_field/text_field.dart';
 
 import '../../../../../shared/ui/widgets/twitter_text_field/twitter_text_field_controller.dart';
+import '../../../domain/user.dart';
 import '../../widgets/twitter_appbar.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -17,6 +19,7 @@ class CreateAccountPage extends StatefulWidget {
 class _CreateAccountPageState extends State<CreateAccountPage> {
   TwitterTextFieldController nameController = TwitterTextFieldController();
   TwitterTextFieldController emailController = TwitterTextFieldController();
+  CreateAccountPageController controller = CreateAccountPageController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +78,15 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
   }
 
-  void confirm() {
-    print('Continuando para próxima tela!');
-    Navigator.pushNamed(context, '/friend_suggestions');
+  Future<void> confirm() async {
+    User user = await controller.confirmWithCredentials(
+      username: "",
+      password: "123123",
+      name: nameController.input,
+      email: emailController.input
+    );
+
+    Navigator.pushNamed(context, '/friend_suggestions', arguments: user);
   }
+
 }

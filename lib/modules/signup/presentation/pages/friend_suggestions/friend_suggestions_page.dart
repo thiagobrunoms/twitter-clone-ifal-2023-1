@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/data/load_friends_suggestions_datasource.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/data/load_friends_suggestions_datasource_impl.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/domain/signup_repository.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/data/datasources/signup_google_datasource.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/friend_suggestions/widgets/friends_to_follow/friend_card_widget.dart';
 
 import '../../../../../shared/ui/widgets/subtitle_widget.dart';
 import '../../../../../shared/ui/widgets/title_widget.dart';
-import '../../../data/sign_up_repository.dart';
-import '../../../domain/friend.dart';
+import '../../../data/datasources/load_friends_suggestions_datasource.dart';
+import '../../../data/datasources/load_friends_suggestions_datasource_impl.dart';
+import '../../../data/datasources/signup_rest_datasource.dart';
+import '../../../data/datasources/signup_web_datasource.dart';
+import '../../../data/repositories/signup_repository.dart';
+import '../../../domain/entities/friend.dart';
+import '../../../domain/repositories/signup_repository.dart';
 import '../../widgets/twitter_appbar.dart';
 import 'friend_suggestions_page_controller.dart';
 
@@ -23,10 +28,8 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
   
   @override
   void initState() {
-    LoadFriendSuggestionsDatasource datasource = LoadFriendSuggestionsDatasourceImpl();
-    SignUpRepository repository = SignUpRepositoryImpl(datasource: datasource);
-    controller = FriendSuggestionsPageController(repository: repository);
-
+    controller = FriendSuggestionsPageController();
+    controller.loadFriendSuggestions();
     super.initState();
   }
 
@@ -46,24 +49,22 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
                 const SubtitleWidget(title: 'Ao seguir alguém você verá os twittes dessa pessoa em sua timeline na página inicial'),
                 const SizedBox(height: 10),
                 TitleWidget(title: 'Pessoas que talvez você conheça', size: 20),
-                FutureBuilder<List<Friend>>(
-                  future: controller.loadFriendSuggestions(),
-                  builder: (_, snapshot) {
-                    if (!snapshot.hasData) {
+                Observer(
+                  builder: (context) {
+                    if (controller.observableLoadFriends != null && 
+                        controller.observableLoadFriends!.status == FutureStatus.pending && 
+                        controller.friends == null) {
                       return const CircularProgressIndicator();
                     }
 
-                    if (snapshot.data == null) {
-                      return const Text('Não há sugestões de amigos!');
-                    }
-                    
-                    List<Friend> friendsSuggestions = snapshot.data!;
+                    List<Friend> friendsSuggestions = controller.friends!;
                     List<Widget> friendCards = friendsSuggestions.map(_createFriendCard).toList();
                     
                     return Column(
                       children: friendCards,
-                    );
-                  })
+                    );  
+                  }
+                ),  
               ],
             ),
           ),
