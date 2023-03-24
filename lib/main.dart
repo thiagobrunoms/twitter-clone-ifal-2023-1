@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SignUpInit(), //const CreateAccountPage(), // const MyHomePage(title: 'Flutter', faculty: 'IFAL 2023',),
+      home: const FriendSuggestionsPage(), //const SignUpInit(), //const CreateAccountPage(), // const MyHomePage(title: 'Flutter', faculty: 'IFAL 2023',),
       routes: {
         '/choose_language': (context) => const ChooseLanguagePage(), 
         '/create_account': (context) => const CreateAccountPage(),

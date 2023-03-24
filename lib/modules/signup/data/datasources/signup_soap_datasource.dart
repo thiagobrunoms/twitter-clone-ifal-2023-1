@@ -1,7 +1,8 @@
 
 import 'package:twitter_clone_ifal_2023/modules/signup/data/datasources/signup_web_datasource.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/domain/credentials.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/domain/user.dart';
+
+import '../../domain/entities/credentials.dart';
 
 class SignUpSOAPDatasource implements SignUpWebDatasource {
   

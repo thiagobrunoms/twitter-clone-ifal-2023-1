@@ -1,6 +1,6 @@
 import 'package:twitter_clone_ifal_2023/modules/signup/domain/user.dart';
 
-import 'credentials.dart';
+import '../entities/credentials.dart';
 
 
 abstract class SignUpRepository {

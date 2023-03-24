@@ -1,15 +1,19 @@
-// import 'package:twitter_clone_ifal_2023/modules/signup/data/load_friends_suggestions_datasource.dart';
-// import 'package:twitter_clone_ifal_2023/modules/signup/domain/friend.dart';
 
-// import 'signup_repository.dart';
 
-// class SignUpRepositoryImpl implements SignUpRepository {
-//   SignUpRepositoryImpl({required this.datasource});
+import 'package:twitter_clone_ifal_2023/modules/signup/domain/entities/friend.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/domain/repositories/friends_repository.dart';
 
-//   LoadFriendSuggestionsDatasource datasource;
+import '../datasources/load_friends_suggestions_datasource.dart';
 
-//   @override
-//   Future<List<Friend>> loadSuggestionsFriends() async {
-//     return await datasource.loadFriendSuggestions();
-//   }
-// }
+class FriendsRepositoryImpl implements FriendRepository {
+  FriendsRepositoryImpl({required this.datasource});
+
+  LoadFriendSuggestionsDatasource datasource;
+
+  @override
+  Future<List<Friend>> loadSuggestionsFriends() async {
+    return await datasource.loadFriendSuggestions();
+  }
+
+  
+}
