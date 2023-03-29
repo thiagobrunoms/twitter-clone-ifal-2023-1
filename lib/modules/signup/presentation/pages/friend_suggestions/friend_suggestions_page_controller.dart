@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/data/datasources/load_friends_suggestions_datasource_impl.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/data/repositories/friends_repository.dart';
@@ -23,7 +24,7 @@ abstract class _FriendSuggestionsPageControllerBase with Store {
 
   @action
   Future<void> loadFriendSuggestions() async {
-    LoadFriendSuggestionsDatasourceImpl datasource = LoadFriendSuggestionsDatasourceImpl();
+    LoadFriendSuggestionsDatasourceImpl datasource = LoadFriendSuggestionsDatasourceImpl(dio: Dio());
     FriendRepository repository = FriendsRepositoryImpl(datasource: datasource);
 
     observableLoadFriends = ObservableFuture(

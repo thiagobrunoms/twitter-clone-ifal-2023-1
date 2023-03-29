@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/data/datasources/signup_google_datasource.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/friend_suggestions/widgets/friends_to_follow/friend_card_widget.dart';
 
 import '../../../../../shared/ui/widgets/subtitle_widget.dart';
 import '../../../../../shared/ui/widgets/title_widget.dart';
-import '../../../data/datasources/load_friends_suggestions_datasource.dart';
-import '../../../data/datasources/load_friends_suggestions_datasource_impl.dart';
-import '../../../data/datasources/signup_rest_datasource.dart';
-import '../../../data/datasources/signup_web_datasource.dart';
-import '../../../data/repositories/signup_repository.dart';
 import '../../../domain/entities/friend.dart';
-import '../../../domain/repositories/signup_repository.dart';
 import '../../widgets/twitter_appbar.dart';
 import 'friend_suggestions_page_controller.dart';
 
