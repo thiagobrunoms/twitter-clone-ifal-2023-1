@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/custom_checkbox/custom_checkbox.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../../shared/ui/widgets/twitter_button.dart';
@@ -29,9 +30,9 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
               _buildLanguageList(),
               TwitterButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/create_account');
+                    Modular.to.pushNamed('/create_account');
                   }, 
-                  child: const Text('Create Account')
+                  child: const Text('Personal Data')
                 )
             ],
           ),

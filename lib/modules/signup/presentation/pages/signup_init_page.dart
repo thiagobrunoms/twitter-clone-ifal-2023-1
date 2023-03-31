@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/bird_icon_widget.dart';
 
-import '../../../shared/ui/widgets/twitter_button.dart';
+import '../../../../shared/ui/widgets/twitter_button.dart';
 
 class SignUpInit extends StatelessWidget {
   const SignUpInit({super.key});
@@ -51,7 +52,7 @@ class SignUpInit extends StatelessWidget {
 
   void handleSignUp(BuildContext context) {
     print('Fazer sign up normal!!');
-    Navigator.pushNamed(context, '/choose_language');
+    Modular.to.pushNamed('/choose_language');
   }
 
   void handleSocial() {

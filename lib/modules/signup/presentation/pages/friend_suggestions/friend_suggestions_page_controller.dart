@@ -12,9 +12,9 @@ part 'friend_suggestions_page_controller.g.dart';
 class FriendSuggestionsPageController = _FriendSuggestionsPageControllerBase with _$FriendSuggestionsPageController;
 
 abstract class _FriendSuggestionsPageControllerBase with Store {
-  
+  final FriendRepository repository;
 
-  _FriendSuggestionsPageControllerBase();
+  _FriendSuggestionsPageControllerBase({required this.repository});
 
   @observable
   ObservableFuture<List<Friend>>? observableLoadFriends;
@@ -24,9 +24,7 @@ abstract class _FriendSuggestionsPageControllerBase with Store {
 
   @action
   Future<void> loadFriendSuggestions() async {
-    LoadFriendSuggestionsDatasourceImpl datasource = LoadFriendSuggestionsDatasourceImpl(dio: Dio());
-    FriendRepository repository = FriendsRepositoryImpl(datasource: datasource);
-
+    print('loading friends...');
     observableLoadFriends = ObservableFuture(
       repository.loadSuggestionsFriends()
     );

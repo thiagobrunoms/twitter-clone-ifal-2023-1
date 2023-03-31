@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/friend_suggestions/widgets/friends_to_follow/friend_card_widget.dart';
+import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_button.dart';
 
 import '../../../../../shared/ui/widgets/subtitle_widget.dart';
 import '../../../../../shared/ui/widgets/title_widget.dart';
@@ -21,7 +23,8 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
   
   @override
   void initState() {
-    controller = FriendSuggestionsPageController();
+    print('init state friend sugg....');
+    controller = Modular.get<FriendSuggestionsPageController>();
     controller.loadFriendSuggestions();
     super.initState();
   }
@@ -52,7 +55,17 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
 
                     List<Friend> friendsSuggestions = controller.friends!;
                     List<Widget> friendCards = friendsSuggestions.map(_createFriendCard).toList();
-                    
+                    friendCards.add(
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TwitterButton(
+                          child: const Text('Next'), 
+                          onPressed: () {
+                            Modular.to.pushNamed('/choose_themes');
+                          },
+                        ),
+                      )
+                    );
                     return Column(
                       children: friendCards,
                     );  

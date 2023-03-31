@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone_ifal_2023/modules/signup/presentation/signup_init_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:twitter_clone_ifal_2023/modules/app_module.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/signup_init_page.dart';
 
 import 'modules/signup/presentation/pages/choose_language/choose_language_page.dart';
 import 'modules/signup/presentation/pages/create_account/create_account_page.dart';
@@ -7,7 +9,7 @@ import 'modules/signup/presentation/pages/friend_suggestions/friend_suggestions_
 import 'modules/signup/presentation/pages/themes_list/themes_list_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,18 +17,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Twitter Clone',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ThemeListPage(), //const FriendSuggestionsPage(), //const SignUpInit(), //const CreateAccountPage(), // const MyHomePage(title: 'Flutter', faculty: 'IFAL 2023',),
-      routes: {
-        '/choose_language': (context) => const ChooseLanguagePage(), 
-        '/create_account': (context) => const CreateAccountPage(),
-        '/friend_suggestions': (context) => const FriendSuggestionsPage()
-      },
-      
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }
