@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:twitter_clone_ifal_2023/modules/signup/domain/user.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/friend_suggestions/widgets/friends_to_follow/friend_card_widget.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/twitter_button.dart';
 
@@ -12,7 +13,8 @@ import '../../widgets/twitter_appbar.dart';
 import 'friend_suggestions_page_controller.dart';
 
 class FriendSuggestionsPage extends StatefulWidget {
-  const FriendSuggestionsPage({super.key});
+  final User? user;
+  const FriendSuggestionsPage({super.key, required this.user});
 
   @override
   State<FriendSuggestionsPage> createState() => _FriendSuggestionsPageState();
@@ -26,6 +28,11 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
     print('init state friend sugg....');
     controller = Modular.get<FriendSuggestionsPageController>();
     controller.loadFriendSuggestions();
+
+    if (widget.user != null) {
+      print('USER CADASTRADO ${widget.user!.id}, ${widget.user!.firstName}, ${widget.user!.age}');
+    }
+
     super.initState();
   }
 
@@ -42,7 +49,7 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [  
                 TitleWidget(title: 'Sugestões de perfis para seguir'),
-                const SubtitleWidget(title: 'Ao seguir alguém você verá os twittes dessa pessoa em sua timeline na página inicial'),
+                SubtitleWidget(title: 'Ao seguir alguém, você, ${widget.user!.firstName} verá os twittes dessa pessoa em sua timeline na página inicial'),
                 const SizedBox(height: 10),
                 TitleWidget(title: 'Pessoas que talvez você conheça', size: 20),
                 Observer(
@@ -50,7 +57,9 @@ class _FriendSuggestionsPageState extends State<FriendSuggestionsPage> {
                     if (controller.observableLoadFriends != null && 
                         controller.observableLoadFriends!.status == FutureStatus.pending && 
                         controller.friends == null) {
-                      return const CircularProgressIndicator();
+                      return const Align(
+                        alignment: Alignment.centerRight,
+                        child: CircularProgressIndicator());
                     }
 
                     List<Friend> friendsSuggestions = controller.friends!;

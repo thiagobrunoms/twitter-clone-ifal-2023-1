@@ -10,9 +10,7 @@ class LoadFriendSuggestionsDatasourceImpl implements LoadFriendSuggestionsDataso
   final Dio dio;
 
   Future<List<Friend>> loadFriendSuggestions() async {
-    Dio dio2 = Dio();
-    print('loading friends');
-    var response = await dio2.get('https://dummyjson.com/users');
+    var response = await dio.get('/users');
     List<dynamic> users = response.data['users'] as List;
 
     return users.map((usersJson) => Friend.fromMap(usersJson)).toList();
