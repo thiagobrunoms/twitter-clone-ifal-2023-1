@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../shared/ui/widgets/bird_icon_widget.dart';
 
 class TwitterAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const TwitterAppBar({super.key});
+  const TwitterAppBar({super.key, this.leading});
+
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,7 @@ class TwitterAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: const BirdIconWidget(),
       centerTitle: true,
+      leading: leading,
       iconTheme: const IconThemeData(color: Colors.black),
     );
   }

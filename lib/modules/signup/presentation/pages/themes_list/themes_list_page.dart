@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/domain/entities/twitter_theme.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/pages/themes_list/widgets/theme_container.dart';
 import 'package:twitter_clone_ifal_2023/modules/signup/presentation/widgets/twitter_appbar.dart';
 import 'package:twitter_clone_ifal_2023/shared/ui/widgets/subtitle_widget.dart';
 
 import '../../../../../shared/ui/widgets/title_widget.dart';
+import '../../../../../shared/ui/widgets/twitter_button.dart';
 
 class ThemeListPage extends StatefulWidget {
   const ThemeListPage({super.key});
@@ -64,6 +66,18 @@ class _ThemeListPageState extends State<ThemeListPage> {
                 padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: SubtitleWidget(title: 'Você pode escolher os temas para que o twitter selecione as melhores postagens para você!'),
               ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TwitterButton(
+                  child: const Text('Finish'), 
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  onPressed: () {
+                    Modular.to.pushNamed('/feed');
+                  },
+                ),
+              ),
+              SizedBox(height: 20.0,),
               ...themeRows,
             ],
           ),

@@ -8,8 +8,8 @@ class AppModule extends Module {
 
   @override
   List<ModuleRoute> get routes => [
-    ModuleRoute('/', module: SignUpModule()),
+    // ModuleRoute('/', module: SignUpModule()),
     ModuleRoute('/signin', module: SignInModule()),
-    ModuleRoute('/feed', module: FeedModule()),
+    ModuleRoute('/', module: FeedModule()),
   ];
 }
