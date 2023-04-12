@@ -8,7 +8,8 @@ class PostUpperInfoWidget extends StatelessWidget {
 
   final Post post;
 
-  final TextStyle myStyle = const TextStyle(fontSize: 16);
+  final TextStyle myStyleBold = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+  final TextStyle myStyleGrey = const TextStyle(fontSize: 14, color: Colors.grey);
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +18,21 @@ class PostUpperInfoWidget extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('João da Silva', style: myStyle,),
-        const Icon(Icons.escalator_sharp),
-        const Icon(Icons.check_circle, color: Colors.blue,),
-        Text('@joao', style: myStyle,),
-        Text(dateFormat.format(postDate), style: myStyle),
-        IconButton(
-          onPressed: () {}, 
-          icon: Icon(Icons.more_vert)
+        Text('João da Silva', style: myStyleBold,),
+        const Icon(Icons.check_circle, color: Colors.blue, size: 17,),
+        Row(
+          children: [
+            Text('@joao', style: myStyleGrey,),
+            Text(dateFormat.format(postDate), style: myStyleGrey),
+          ],
+        ),
+        InkWell(
+          onTap: () {
+            print('Abrir menu bottom');
+          },
+          child: const Icon(Icons.more_vert, color: Colors.grey,),
         )
       ],
     );

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone_ifal_2023/modules/feed/presentation/models/post.dart';
-import 'package:twitter_clone_ifal_2023/modules/feed/presentation/widgets/post_content.dart';
+import 'package:twitter_clone_ifal_2023/modules/feed/presentation/widgets/post_content_area.dart';
 import 'package:twitter_clone_ifal_2023/modules/feed/presentation/widgets/user_avatar.dart';
 
 class PostWidget extends StatefulWidget {
-  // final Post post;
-  const PostWidget({super.key});
+  const PostWidget({super.key, required this.post});
+
+  final Post post;
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
 }
 
 class _PostWidgetState extends State<PostWidget> {
-
-  late Post postExample;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,11 @@ class _PostWidgetState extends State<PostWidget> {
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          UserAvatar(imageURL: 'https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
-          Expanded(child: PostContent()),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const UserAvatar(imageURL: 'https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
+          const SizedBox(width: 10,),
+          Expanded(child: PostContentArea(post: widget.post)),
         ],
       ),
     );
