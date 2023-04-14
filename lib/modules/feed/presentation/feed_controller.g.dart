@@ -41,11 +41,28 @@ mixin _$FeedPageController on _FeedPageControllerBase, Store {
     });
   }
 
+  late final _$observableStreamAtom =
+      Atom(name: '_FeedPageControllerBase.observableStream', context: context);
+
+  @override
+  ObservableStream<List<Post>>? get observableStream {
+    _$observableStreamAtom.reportRead();
+    return super.observableStream;
+  }
+
+  @override
+  set observableStream(ObservableStream<List<Post>>? value) {
+    _$observableStreamAtom.reportWrite(value, super.observableStream, () {
+      super.observableStream = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 postsFuture: ${postsFuture},
-observablePostsList: ${observablePostsList}
+observablePostsList: ${observablePostsList},
+observableStream: ${observableStream}
     ''';
   }
 }

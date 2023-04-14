@@ -19,35 +19,35 @@ class _PostActionsWidgetState extends State<PostActionsWidget> {
       children: [
         PostAction(
           icon: Icons.message,
-          number: 123,
+          number: widget.post.comments,
           callback: () {
             print('Ação de comentar!');
           }
         ),
         PostAction(
           icon: Icons.sync,
-          number: 123,
+          number: widget.post.reposts,
           callback: () {
             print('Ação de repostar!');
           }
         ),
         PostAction(
           icon: Icons.favorite_outline_sharp,
-          number: 123,
+          number: widget.post.likes,
           callback: () {
             print('Ação de like!');
           }
         ),
         PostAction(
           icon: Icons.stacked_bar_chart,
-          number: 123,
+          number: widget.post.statistics,
           callback: () {
             print('Ação de estatística!');
           }
         ),
         PostAction(
           icon: Icons.share_outlined,
-          number: 123,
+          number: widget.post.shares,
           callback: () {
             print('Ação de compartilhar!');
           }

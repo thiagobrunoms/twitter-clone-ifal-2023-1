@@ -44,24 +44,55 @@ class _FeedPageState extends State<FeedPage> {
       // ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Observer(
-            builder: (context) {
-              if (controller.postsFuture == null) {
-                return const CircularProgressIndicator.adaptive();
-              }
-
-              if (controller.observablePostsList!.isEmpty) {
-                return const Center(child: Text('Não já posts!'),);
-              }
-              
-              return Column(
-                children: controller.observablePostsList!.map((eachPost) => PostWidget(post: eachPost)).toList(),
-              );
-              
-            }
-          )
+          child: _listenToPosts()
         ),
       ),
     );
+  }
+
+  Widget _loadPosts() {
+    return Observer(
+      builder: (context) {
+        if (controller.postsFuture == null) {
+          return const CircularProgressIndicator.adaptive();
+        }
+
+        if (controller.observablePostsList!.isEmpty) {
+          return const Center(child: Text('Não há posts!'),);
+        }
+        
+        return Column(
+          children: controller.observablePostsList!.map((eachPost) => PostWidget(post: eachPost)).toList(),
+        );
+        
+      }
+    );
+  }
+
+  Widget _listenToPosts() {
+    return StreamBuilder(
+      stream: controller.listenToPosts(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const CircularProgressIndicator.adaptive();
+        }
+
+        if (snapshot.data != null) {
+          List<Post> posts = snapshot.data!;
+
+          if (posts.isEmpty) {
+            return const Center(child: Text('Não há posts!'),);
+          }
+
+          return Column(
+            children: posts.map((eachPost) => PostWidget(post: eachPost)).toList(),
+          );
+        }
+
+        return Container();
+        
+      },
+    );
+  
   }
 }

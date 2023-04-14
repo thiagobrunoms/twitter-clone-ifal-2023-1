@@ -15,4 +15,11 @@ class FeedRestDatasource implements FeedDatasource {
     return dataList.map((eachPostMap) => Post.fromMap(eachPostMap)).toList();
   }
   
+  @override
+  Stream<List<Post>> listenPosts() {
+    // TODO: implement listenPosts
+    throw UnimplementedError();
+  }
+  
 }
+
