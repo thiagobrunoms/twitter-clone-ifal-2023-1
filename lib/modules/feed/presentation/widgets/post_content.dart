@@ -14,6 +14,7 @@ class _PostContentState extends State<PostContent> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.post.body),
         const SizedBox(height: 10,),

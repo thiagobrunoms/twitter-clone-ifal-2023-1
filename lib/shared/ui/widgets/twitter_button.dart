@@ -31,6 +31,18 @@ class TwitterButton extends StatelessWidget {
     side = BorderSide(color: Colors.grey[350]!);
   }
 
+  TwitterButton.visibility({
+    super.key, 
+    this.elevation = 0,
+    this.backColor = Colors.white,
+    required this.child, 
+    this.width,
+    this.height,
+    this.onPressed,
+  }) {
+    side = const BorderSide(color: Colors.blue);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

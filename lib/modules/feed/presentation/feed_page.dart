@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:twitter_clone_ifal_2023/modules/feed/presentation/models/post.dart';
+import 'package:twitter_clone_ifal_2023/modules/feed/presentation/widgets/create_post_widget/create_post_widget.dart';
 import 'package:twitter_clone_ifal_2023/modules/feed/presentation/widgets/post_widget.dart';
 
 import '../../signup/presentation/widgets/twitter_appbar.dart';
@@ -29,23 +30,30 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: TwitterAppBar(
-      //   leading: Container(
-      //     height: 4,
-      //     width: 4,
-      //     decoration: const BoxDecoration(
-      //       shape: BoxShape.circle,
-      //       image: DecorationImage(
-      //         image: NetworkImage('https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
-      //         fit: BoxFit.cover              
-      //       )
-      //     ),
-      //   ),
-      // ),
+      appBar: const TwitterAppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage('https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: _listenToPosts()
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context, 
+            isScrollControlled: true,
+            builder: (context) {
+              return const CreatePostWidget();
+            }
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -17,13 +17,13 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const UserAvatar(imageURL: 'https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
+          UserAvatar(imageURL: widget.post.userProfile),
           const SizedBox(width: 10,),
           Expanded(child: PostContentArea(post: widget.post)),
         ],

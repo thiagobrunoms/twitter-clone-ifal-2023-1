@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Post {
   Post({
     required this.id, 
-    required this.userId, 
+    required this.user, 
+    required this.account, 
+    required this.userProfile,
     required this.title,
     required this.body,
     this.media,
@@ -16,7 +18,9 @@ class Post {
   });
 
   final String id;
-  final String userId;
+  final String user;
+  final String account;
+  final String userProfile;
   final String title;
   final String body;
   final String? media; //URL
@@ -37,7 +41,9 @@ class Post {
     return Post(
       id: map['id'].toString(),
       body: map['body'],
-      userId: map['userId'].toString(),
+      user: map['user'],
+      userProfile: map['user_profile'],
+      account: map['account'],
       title: map['title'],
       date: dateTime ?? DateTime.now(),
       media: map['media'],
