@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Modular.setInitialRoute('/feeds');
     return MaterialApp.router(
       title: 'Twitter Clone',
       theme: ThemeData(

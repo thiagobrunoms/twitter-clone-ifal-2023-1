@@ -21,6 +21,7 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isExpanded = false;
   late TabController _tabController;
+  int selected = 0;
 
   @override
   void initState() {
@@ -32,124 +33,36 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    Modular.setInitialRoute('/feeds');
+    
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Text('Thiago'),
-              ExpansionTile(
-                title: Text('Tile Title'),
-                subtitle: Text('Sub'),
-                children: [
-                  Text('saLES,. BRUSADF')
-                ],
-              ),
-              ExpansionTile(
-                title: Text('Tile Title'),
-                subtitle: Text('Sub'),
-                children: [
-                  Text('saLES,. BRUSADF')
-                ],
-              )
-            ],
-          )
-        )
-      ),
-      appBar: TwitterAppBar(
-        leading: InkWell(
-          onTap: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage('https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
-            ),
-          ),
-        ),
-        bottom: TabBar(
-          controller: _tabController,
-          labelColor: Colors.blue,
-          tabs: const [
-            Tab(text: 'For you', ),
-            Tab(text: 'Following',),
-        ]),
-      ),
-      body: SafeArea(
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            SingleChildScrollView(child: _listenToPosts()),
-            SingleChildScrollView(child: Column(
-              children: [
-                Text('Outro'),
-              ],
-            )),
-          ]
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context, 
-            isScrollControlled: true,
-            builder: (context) {
-              return const CreatePostWidget();
-            }
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+      body: const RouterOutlet(),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black,
+        currentIndex: selected,
+        onTap: (index) {
+          setState(() {
+            selected = index;
+          });
 
-  Widget _loadPosts() {
-    return Observer(
-      builder: (context) {
-        if (controller.postsFuture == null) {
-          return const CircularProgressIndicator.adaptive();
-        }
-
-        if (controller.observablePostsList!.isEmpty) {
-          return const Center(child: Text('Não há posts!'),);
-        }
-        
-        return Column(
-          children: controller.observablePostsList!.map((eachPost) => PostWidget(post: eachPost)).toList(),
-        );
-        
-      }
-    );
-  }
-
-  Widget _listenToPosts() {
-    return StreamBuilder(
-      stream: controller.listenToPosts(),
-      builder: (context, snapshot) {
-        print('snapshot.hasData ${snapshot.hasData}');
-        if (!snapshot.hasData) {
-          return const CircularProgressIndicator.adaptive();
-        }
-
-        if (snapshot.data != null) {
-          List<Post> posts = snapshot.data!;
-
-          if (posts.isEmpty) {
-            return const Center(child: Text('Não há posts!'),);
+          if (index == 0) {
+            Modular.to.navigate('/feeds');
+          } else if (index == 1) {
+            Modular.to.navigate('/page1');
+          } else if (index == 2) {
+            Modular.to.navigate('/page2');
           }
-
-          return Column(
-            children: posts.map((eachPost) => PostWidget(post: eachPost)).toList(),
-          );
-        }
-
-        return Container();
-        
-      },
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home,), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search, ), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.mic, ), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_active_outlined, ), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.mail_outline,), label: ''),
+        ]
+      ),
     );
-  
   }
+
 }
