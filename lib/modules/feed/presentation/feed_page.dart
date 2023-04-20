@@ -16,31 +16,79 @@ class FeedPage extends StatefulWidget {
   State<FeedPage> createState() => _FeedPageState();
 }
 
-class _FeedPageState extends State<FeedPage> {
+class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin {
   late FeedPageController controller;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isExpanded = false;
+  late TabController _tabController;
 
   @override
   void initState() {
     controller = Modular.get<FeedPageController>();
     controller.fetchFeed();
-
+    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TwitterAppBar(
-        leading: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage('https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Text('Thiago'),
+              ExpansionTile(
+                title: Text('Tile Title'),
+                subtitle: Text('Sub'),
+                children: [
+                  Text('saLES,. BRUSADF')
+                ],
+              ),
+              ExpansionTile(
+                title: Text('Tile Title'),
+                subtitle: Text('Sub'),
+                children: [
+                  Text('saLES,. BRUSADF')
+                ],
+              )
+            ],
+          )
+        )
+      ),
+      appBar: TwitterAppBar(
+        leading: InkWell(
+          onTap: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage('https://buffer.com/library/content/images/2020/05/Ash-Read.png'),
+            ),
           ),
         ),
+        bottom: TabBar(
+          controller: _tabController,
+          labelColor: Colors.blue,
+          tabs: const [
+            Tab(text: 'For you', ),
+            Tab(text: 'Following',),
+        ]),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: _listenToPosts()
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            SingleChildScrollView(child: _listenToPosts()),
+            SingleChildScrollView(child: Column(
+              children: [
+                Text('Outro'),
+              ],
+            )),
+          ]
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,6 +129,7 @@ class _FeedPageState extends State<FeedPage> {
     return StreamBuilder(
       stream: controller.listenToPosts(),
       builder: (context, snapshot) {
+        print('snapshot.hasData ${snapshot.hasData}');
         if (!snapshot.hasData) {
           return const CircularProgressIndicator.adaptive();
         }

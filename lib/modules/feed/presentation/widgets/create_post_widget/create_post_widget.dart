@@ -24,6 +24,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
           ],
         ),
       ),
+      // bottomNavigationBar: Column(),
     );
   }
 }

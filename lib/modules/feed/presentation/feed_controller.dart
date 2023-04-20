@@ -29,7 +29,7 @@ abstract class _FeedPageControllerBase with Store {
 
   Stream<List<Post>> listenToPosts() {
     observableStream = ObservableStream(feedDatasource.listenPosts());
-    return observableStream!.asBroadcastStream();
+    return observableStream!.asObservable();
   }
   
 }
