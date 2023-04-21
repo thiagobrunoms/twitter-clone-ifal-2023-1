@@ -32,8 +32,9 @@ class FeedFirebaseDatasource implements FeedDatasource {
   }
   
   @override
-  Future<void> createPost(CreatePost post) async {
-    await _firestore.collection('posts').add(post.toMap());
+  Future<bool> createPost(CreatePost post) async {
+    var result = await _firestore.collection('posts').add(post.toMap());
+    return result.id.isNotEmpty;
   }
   
 }

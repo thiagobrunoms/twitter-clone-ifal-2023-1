@@ -24,7 +24,7 @@ class FeedRestDatasource implements FeedDatasource {
   }
   
   @override
-  Future<void> createPost(CreatePost post) {
+  Future<bool> createPost(CreatePost post) {
     // TODO: implement createPost
     throw UnimplementedError();
   }

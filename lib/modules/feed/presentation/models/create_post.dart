@@ -35,10 +35,12 @@ class CreatePost {
       'account': '@fakeaccount',
       'body': body,
       'shares': shares,
+      'title': '',
       'likes': likes,
       'comments': comments,
       'statistics': statistics,
-      'reposts': reposts
+      'reposts': reposts,
+      'media': 'https://1.bp.blogspot.com/-EK3WGVcbiqU/YKa3yrUC_XI/AAAAAAAAwI0/_mGYtajE8zAqvN2R9qbQhKTtNMvteZU5QCLcBGAsYHQ/s2048/Audi-e-Tron-GT-Brasil%2B%252813%2529.JPG'
     };
   }
 

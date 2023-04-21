@@ -4,5 +4,5 @@ import '../presentation/models/post.dart';
 abstract class FeedDatasource {
   Future<List<Post>> loadPosts();
   Stream<List<Post>> listenPosts();
-  Future<void> createPost(CreatePost post);
+  Future<bool> createPost(CreatePost post);
 }
